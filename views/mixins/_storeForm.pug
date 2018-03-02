@@ -1,0 +1,70 @@
+//-
+//-Copyright (c) 2018. Beaconstalk Technologies Pvt Ltd
+//-Author: Ramakrishnan A
+//-
+mixin storeForm(store = {})
+    form(action=`/addStore/${store._id || ''}` method="POST" class="card" enctype="multipart/form-data")
+        label(for="name")
+            strong Name
+        input(type="text" name="name" value=store.name)
+
+        label(for="photo")
+            strong Photo
+            input(type="file" name="photo" id="photo" accept="image/gif, image/png, image/jpeg, image/jpg")
+            if (store.photo)
+                img(src=`/uploads/${store.photo}`, alt=store.name width=200)
+        //- Address, Longitude and Latitude
+        label(for="address")
+            strong Address
+        input(type="text" id="address" name="location[address]" value=(store.location && store.location.address))
+        label(for="longitude")
+            strong Longitude
+        input(type="text" id="longitude" name="location[coordinates][0]" value=(store.location && store.location.coordinates[0]))
+        label(for="latitude")
+            strong Latitude
+        input(type="text" id="latitude" name="location[coordinates][1]" value=(store.location && store.location.coordinates[0]))
+
+        label(for="description")
+            strong Description
+        textarea(name="description")= store.description
+
+        - const choices = ['Grocery', 'Medicines', 'Wellness', 'Supermarket', 'Multibrand', 'Apparel']
+        - const tags = store.tags || [ ]
+        label(for="tags")
+            strong Tags
+        ul.tags
+            each choice in choices
+                .tag.tag__choice
+                    input(type="checkbox" 
+                          id=choice 
+                          value=choice 
+                          name="tags" 
+                          checked=(tags.includes(choice))
+                          )
+                    label(for=choice) #{choice}
+        
+        label(for="storeTimings")
+            strong Store Timings
+        input(type="text" name="storeTimings" value=store.storeTimings)
+        
+        label(for="storeLink")
+            strong Link to Website
+        input(type="text" name="storeLink" value=store.storeLink)
+        
+        label(for="storeOwnerName")
+            strong Owner's Name
+        input(type="text" name="storeOwnerName" value=store.storeOwnerName)
+        
+        label(for="storeOwnerContactNumber")
+            strong Owner's Contact Number
+        input(type="text" name="storeOwnerContactNumber" value=store.storeOwnerContactNumber)
+        
+        label(for="storeBoxId")
+            strong Ekasta ID
+        input(type="text" name="storeBoxId" value=store.storeBoxId)
+        
+        //- Yet to figure out how to put a line break. So, a p tag.
+        p
+        //TODO Add a line about accepting terms & conditions and link it to the correct place.
+
+        input(type="submit" value="Save" class="button")

@@ -1,0 +1,11 @@
+//-
+//-Copyright (c) 2018. Beaconstalk Technologies Pvt Ltd
+//-Author: Ramakrishnan A
+//-
+
+extends layout
+include mixins/_storeForm
+block content
+    .inner
+        h2 #{title}
+        +storeForm(store)

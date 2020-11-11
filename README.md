@@ -1,6 +1,6 @@
 #Prapya
 
-Simple store management project based on Wes Bos's course
+Simple store management project
 
 Create & Manage stores/products
 User Registration & Login
